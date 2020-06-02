@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "grocery-shop",
+      "public": "dist/grocery-shop",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

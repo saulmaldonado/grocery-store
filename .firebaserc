@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "grocery-shop-cd470": {
+      "hosting": {
+        "grocery-shop": [
+          "grocery-shop-cd470"
+        ]
+      }
+    }
+  }
+}
