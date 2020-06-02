@@ -16,6 +16,11 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { ProductsComponent } from './products/products.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AuthService } from './services/auth.service';
+import { AuthguardService } from './authguard.service';
+import { OrderSuccessComponent } from './order-success/order-success.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +33,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AdminProductsComponent,
     ProductsComponent,
     NotFoundComponent,
+    OrderSuccessComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,20 +45,46 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
-      { path: 'orders', component: MyordersComponent },
-      { path: 'shoppingcart', component: ShoppingcartComponent },
       { path: 'login', component: LoginComponent },
+      {
+        path: 'orders',
+        component: MyordersComponent,
+        canActivate: [AuthguardService],
+      },
+      {
+        path: 'shoppingcart',
+        component: ShoppingcartComponent,
+        canActivate: [AuthguardService],
+      },
+      {
+        path: 'order-success',
+        component: OrderSuccessComponent,
+        canActivate: [AuthguardService],
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent,
+        canActivate: [AuthguardService],
+      },
       {
         path: 'admin',
         children: [
-          { path: 'orders', component: AdminOrdersComponent },
-          { path: 'products', component: AdminProductsComponent },
+          {
+            path: 'orders',
+            component: AdminOrdersComponent,
+            canActivate: [AuthguardService],
+          },
+          {
+            path: 'products',
+            component: AdminProductsComponent,
+            canActivate: [AuthguardService],
+          },
         ],
       },
       { path: '**', component: NotFoundComponent },
     ]),
   ],
-  providers: [],
+  providers: [AuthService, AuthguardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
