@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { AuthguardService } from './authguard.service';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
       { path: '**', component: NotFoundComponent },
     ]),
   ],
-  providers: [AuthService, AuthguardService],
+  providers: [AuthService, AuthguardService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

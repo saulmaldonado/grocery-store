@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth, User } from 'firebase';
+import { auth, User, UserInfo } from 'firebase';
 import { Observable, from } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map, take, first } from 'rxjs/operators';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class AuthService {
 
   constructor(
     private fbAuth: AngularFireAuth,
-    private router: Router,
+    private userService: UserService,
     private route: ActivatedRoute
   ) {
     this.user$ = fbAuth.user;
@@ -23,6 +24,7 @@ export class AuthService {
     return from(this.fbAuth.getRedirectResult()).pipe(
       map((res) => {
         if (res.user) {
+          this.userService.save(res.user);
           return true;
         } else {
           return false;
