@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CategoriesService } from 'src/app/categories.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-form',
@@ -13,18 +14,41 @@ import { Router } from '@angular/router';
 export class ProductFormComponent implements OnInit {
   categories$;
 
+  // optional id field from route parameters /admin/products/:id
+  id?: string;
+
+  // optional product field that contains the product object
+  product?: Product = {
+    title: '',
+    price: null,
+    category: '',
+    imageUrl: '',
+    id: '',
+  };
+
   constructor(
     private categoriesService: CategoriesService,
     private productService: ProductService,
     private toast: ToastrService,
-    private router: Router
-  ) {
-    this.categories$ = categoriesService.getCategories();
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+  ngOnInit(): void {
+    this.categories$ = this.categoriesService.getCategories();
+
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    if (this.id) {
+      this.productService
+        .get(this.id)
+        .pipe(first())
+        .subscribe((p) => (this.product = p));
+    }
   }
 
-  save(product) {
+  save() {
     this.productService
-      .create(product.value)
+      .create(this.product)
       .then(() => {
         this.toast.success('Product has been added.');
         this.router.navigate(['/admin/products']);
@@ -33,6 +57,4 @@ export class ProductFormComponent implements OnInit {
         this.toast.error('An Error Occurred, product has not been saved.');
       });
   }
-
-  ngOnInit(): void {}
 }
