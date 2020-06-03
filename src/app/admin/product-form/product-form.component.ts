@@ -18,12 +18,11 @@ export class ProductFormComponent implements OnInit {
   id?: string;
 
   // optional product field that contains the product object
-  product?: Product = {
+  product: Product = {
     title: '',
     price: null,
     category: '',
     imageUrl: '',
-    id: '',
   };
 
   constructor(
@@ -47,14 +46,34 @@ export class ProductFormComponent implements OnInit {
   }
 
   save() {
-    this.productService
-      .create(this.product)
-      .then(() => {
-        this.toast.success('Product has been added.');
-        this.router.navigate(['/admin/products']);
-      })
-      .catch(() => {
-        this.toast.error('An Error Occurred, product has not been saved.');
-      });
+    // If the page has an id parameter 'admin/products/:id' the update method will be called
+    if (this.id) {
+      this.productService
+        .update(this.product, this.id)
+        .then(() => {
+          this.toast.success('Product has been successfully updated.');
+        })
+        .catch(() => {
+          this.toast.error(
+            'An error occurred. The product has not been updated.'
+          );
+        });
+    } else {
+      // if the id parameter is not present the product will be saved as a new product
+      this.productService
+        .create(this.product)
+        .then(() => {
+          this.toast.success('Product has been added.');
+        })
+        .catch(() => {
+          this.toast.error('An Error Occurred, product has not been saved.');
+        });
+    }
+
+    /* upon saving, the user will NOT wait for the promise to resolve. 
+    The user will be redirected to AdminProducts and will receive a toast notification */
+    this.router.navigate(['/admin/products']);
   }
+
+  update() {}
 }

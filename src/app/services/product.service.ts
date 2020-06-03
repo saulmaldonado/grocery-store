@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from '../models/product';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +26,9 @@ export class ProductService {
       .collection('products')
       .doc(productId)
       .valueChanges() as Observable<Product>;
+  }
+
+  update(product, id) {
+    return this.db.collection('products').doc(id).set(product, { merge: true });
   }
 }
