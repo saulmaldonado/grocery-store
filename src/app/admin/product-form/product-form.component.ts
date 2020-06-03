@@ -75,5 +75,21 @@ export class ProductFormComponent implements OnInit {
     this.router.navigate(['/admin/products']);
   }
 
+  delete() {
+    if (confirm('Are you sure you want to delete this product?')) {
+      this.productService
+        .delete(this.id)
+        .then(() => {
+          this.toast.success('Product has been deleted.');
+        })
+        .catch(() => {
+          this.toast.error('An Error Occurred, product has not been deleted.');
+        });
+      /* upon saving, the user will NOT wait for the promise to resolve. 
+        The user will be redirected to AdminProducts and will receive a toast notification */
+      this.router.navigate(['/admin/products']);
+    }
+  }
+
   update() {}
 }

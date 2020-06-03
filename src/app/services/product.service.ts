@@ -31,4 +31,8 @@ export class ProductService {
   update(product, id) {
     return this.db.collection('products').doc(id).set(product, { merge: true });
   }
+
+  delete(id) {
+    return this.db.collection('products').doc(id).delete();
+  }
 }

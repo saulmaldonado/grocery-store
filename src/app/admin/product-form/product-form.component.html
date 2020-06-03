@@ -88,6 +88,14 @@
         </div>
       </div>
       <button class="btn btn-primary" [disabled]="f.invalid">Save</button>
+      <button
+        type="button"
+        (click)="delete()"
+        *ngIf="id"
+        class="btn btn-danger"
+      >
+        Delete
+      </button>
     </form>
   </div>
   <div class="col-md-6">
