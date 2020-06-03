@@ -90,6 +90,4 @@ export class ProductFormComponent implements OnInit {
       this.router.navigate(['/admin/products']);
     }
   }
-
-  update() {}
 }
