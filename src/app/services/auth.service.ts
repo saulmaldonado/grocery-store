@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth, User, UserInfo } from 'firebase';
-import { Observable, from } from 'rxjs';
+import { Observable, from, empty } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { map, take, first } from 'rxjs/operators';
+import { map, take, first, switchMap } from 'rxjs/operators';
 import { UserService } from '../user.service';
+import { AppUser } from '../models/app-user';
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +44,17 @@ export class AuthService {
 
   logout() {
     this.fbAuth.signOut();
+  }
+
+  get appUser$(): Observable<AppUser> {
+    return this.user$.pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.userService.getUser(user.uid);
+        } else {
+          return empty();
+        }
+      })
+    );
   }
 }

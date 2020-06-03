@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AppUser } from './models/app-user';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -29,8 +30,14 @@ export class UserService {
   }
 
   getUser(uid: string) {
-    return this.db.collection('users').doc(uid).valueChanges() as Observable<
-      AppUser
-    >;
+    return this.db
+      .collection('users')
+      .doc(uid)
+      .get()
+      .pipe(
+        map((res) => {
+          return res.data() as AppUser;
+        })
+      );
   }
 }
