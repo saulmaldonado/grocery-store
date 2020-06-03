@@ -3,6 +3,7 @@ import { CategoriesService } from 'src/app/categories.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -13,9 +14,10 @@ export class ProductFormComponent implements OnInit {
   categories$;
 
   constructor(
-    categoriesService: CategoriesService,
+    private categoriesService: CategoriesService,
     private productService: ProductService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private router: Router
   ) {
     this.categories$ = categoriesService.getCategories();
   }
@@ -25,6 +27,7 @@ export class ProductFormComponent implements OnInit {
       .create(product.value)
       .then(() => {
         this.toast.success('Product has been added.');
+        this.router.navigate(['/admin/products']);
       })
       .catch(() => {
         this.toast.error('An Error Occurred, product has not been saved.');

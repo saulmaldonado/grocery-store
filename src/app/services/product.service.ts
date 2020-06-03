@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from '../models/product';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -10,5 +11,19 @@ export class ProductService {
 
   create(product: Product) {
     return this.db.collection('products').add(product);
+  }
+
+  getAll() {
+    return this.db
+      .collection('products')
+      .get()
+      .pipe(
+        map((p) => {
+          return p.docs;
+        }),
+        map((p) => {
+          return p.map((p) => p.data());
+        })
+      );
   }
 }
