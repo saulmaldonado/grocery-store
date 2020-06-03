@@ -14,16 +14,6 @@ export class ProductService {
   }
 
   getAll() {
-    return this.db
-      .collection('products')
-      .get()
-      .pipe(
-        map((p) => {
-          return p.docs;
-        }),
-        map((p) => {
-          return p.map((p) => p.data());
-        })
-      );
+    return this.db.collection('products').valueChanges({ idField: 'id' });
   }
 }
