@@ -23,6 +23,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoriesService } from './categories.service';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     AuthguardService,
     UserService,
     AdminAuthGuardService,
+    CategoriesService,
   ],
   bootstrap: [AppComponent],
 })
