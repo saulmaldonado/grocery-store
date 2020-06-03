@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -24,6 +26,9 @@ import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoriesService } from './categories.service';
+import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ngx-custom-validators';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -43,10 +48,14 @@ import { CategoriesService } from './categories.service';
   ],
   imports: [
     BrowserModule,
+    ToastrModule.forRoot(),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule,
     NgbModule,
+    FormsModule,
+    CustomFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
@@ -100,6 +109,7 @@ import { CategoriesService } from './categories.service';
     UserService,
     AdminAuthGuardService,
     CategoriesService,
+    ProductService,
   ],
   bootstrap: [AppComponent],
 })
