@@ -1,23 +1,8 @@
 <div class="row">
   <div class="col-3">
-    <div class="list-group">
-      <a
-        class="list-group-item list-group-item-action"
-        [class.active]="!currentCategory"
-        routerLink="/"
-      >
-        All Categories
-      </a>
-      <a
-        *ngFor="let category of categories$ | async"
-        class="list-group-item list-group-item-action"
-        [class.active]="currentCategory === category.id"
-        routerLink="/"
-        [queryParams]="{ category: category.id }"
-      >
-        {{ category.name }}
-      </a>
-    </div>
+    <app-product-filter
+      [currentCategory]="currentCategory"
+    ></app-product-filter>
   </div>
   <div class="col">
     <div class="row">

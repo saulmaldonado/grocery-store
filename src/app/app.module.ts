@@ -31,6 +31,7 @@ import { CustomFormsModule } from 'ngx-custom-validators';
 import { ProductService } from './services/product.service';
 import { SortableTableDirective } from './directive/sortable-table.directive';
 import { ProductTableService } from './services/product-table.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ProductTableService } from './services/product-table.service';
     CheckoutComponent,
     ProductFormComponent,
     SortableTableDirective,
+    ProductFilterComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product';
 import { Observable } from 'rxjs';
-import { CategoriesService } from '../categories.service';
-import { ActivatedRoute, RouteConfigLoadEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -13,15 +12,13 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ProductsComponent implements OnInit {
   products$: Observable<Product[]>;
-  categories$: Observable<any>;
   products: Product[];
   currentCategory: string;
   filteredProducts: Product[];
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService,
-    private categoriesService: CategoriesService
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +39,5 @@ export class ProductsComponent implements OnInit {
             })
           : this.products;
       });
-
-    this.categories$ = this.categoriesService.getAll();
   }
 }
