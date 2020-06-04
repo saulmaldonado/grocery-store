@@ -1,18 +1,20 @@
-<div class="list-group">
-  <a
-    class="list-group-item list-group-item-action"
-    [class.active]="!currentCategory"
-    routerLink="/"
-  >
-    All Categories
-  </a>
-  <a
-    *ngFor="let category of categories$ | async"
-    class="list-group-item list-group-item-action"
-    [class.active]="currentCategory === category.id"
-    routerLink="/"
-    [queryParams]="{ category: category.id }"
-  >
-    {{ category.name }}
-  </a>
+<div class="sticky-top">
+  <div class="list-group">
+    <a
+      class="list-group-item list-group-item-action"
+      [class.active]="!currentCategory"
+      routerLink="/"
+    >
+      All Categories
+    </a>
+    <a
+      *ngFor="let category of categories$ | async"
+      class="list-group-item list-group-item-action"
+      [class.active]="currentCategory === category.id"
+      routerLink="/"
+      [queryParams]="{ category: category.id }"
+    >
+      {{ category.name }}
+    </a>
+  </div>
 </div>

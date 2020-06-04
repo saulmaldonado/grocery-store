@@ -1,0 +1,24 @@
+<div class="card" style="width: 18rem;">
+  <img
+    [src]="product.imageUrl"
+    class="card-img-top"
+    alt="{{ product.title }}"
+    *ngIf="product.imageUrl; else defaultImage"
+  />
+  <ng-template #defaultImage>
+    <img
+      class="card-img-top"
+      src="https://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder.png"
+      alt="defaultImage"
+    />
+  </ng-template>
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <p class="card-text">{{ product.price | currency: "USD":"symbol" }}</p>
+  </div>
+  <div class="card-footer">
+    <a href="#" class="btn btn-primary btn-block" *ngIf="showActions"
+      >Add To Cart</a
+    >
+  </div>
+</div>

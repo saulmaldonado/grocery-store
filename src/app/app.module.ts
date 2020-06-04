@@ -32,6 +32,7 @@ import { ProductService } from './services/product.service';
 import { SortableTableDirective } from './directive/sortable-table.directive';
 import { ProductTableService } from './services/product-table.service';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
     ProductFormComponent,
     SortableTableDirective,
     ProductFilterComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
