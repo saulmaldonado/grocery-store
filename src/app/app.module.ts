@@ -33,6 +33,7 @@ import { SortableTableDirective } from './directive/sortable-table.directive';
 import { ProductTableService } from './services/product-table.service';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product/product-card/product-card.component';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { ProductCardComponent } from './product/product-card/product-card.compon
     CategoriesService,
     ProductService,
     ProductTableService,
+    ShoppingCartService,
   ],
   bootstrap: [AppComponent],
 })
