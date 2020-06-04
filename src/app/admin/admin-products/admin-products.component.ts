@@ -1,7 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
+import { ProductTableService } from 'src/app/services/product-table.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -9,16 +16,23 @@ import { Product } from 'src/app/models/product';
   styleUrls: ['./admin-products.component.css'],
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
+  @ViewChild('query') query: ElementRef;
   products: Product[];
-  filteredProducts: Product[];
   productsSubscription: Subscription;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    public productTableService: ProductTableService
+  ) {}
 
   ngOnInit(): void {
     this.productsSubscription = this.productService.getAll().subscribe((p) => {
       this.products = p;
-      this.filteredProducts = p;
+
+      /* Sets the initial value of this.productTableService.filteredProducts Subject.
+        If a filter input value is provided, any new product in firestore will be filtered through.
+        This will prevent a reset of the table whenever a new product is save to firestore */
+      this.filter(this.query.nativeElement.value);
     });
   }
 
@@ -27,10 +41,14 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   filter(query: string) {
-    this.filteredProducts = query
-      ? this.products.filter((p) =>
-          p.title.toLowerCase().includes(query.toLowerCase())
+    /* Will filter the value of this.productTableService.filteredProducts
+     by query provided in the search bar */
+    query
+      ? this.productTableService.filteredProducts$.next(
+          this.products.filter((p) =>
+            p.title.toLowerCase().includes(query.toLowerCase())
+          )
         )
-      : this.products;
+      : this.productTableService.filteredProducts$.next(this.products);
   }
 }

@@ -3,12 +3,16 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from '../models/product';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ProductTableService } from './product-table.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private db: AngularFirestore) {}
+  constructor(
+    private db: AngularFirestore,
+    private productTableService: ProductTableService
+  ) {}
 
   create(product: Product) {
     return this.db.collection('products').add(product);

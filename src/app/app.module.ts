@@ -29,6 +29,8 @@ import { CategoriesService } from './categories.service';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ngx-custom-validators';
 import { ProductService } from './services/product.service';
+import { SortableTableDirective } from './directive/sortable-table.directive';
+import { ProductTableService } from './services/product-table.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { ProductService } from './services/product.service';
     OrderSuccessComponent,
     CheckoutComponent,
     ProductFormComponent,
+    SortableTableDirective,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +118,7 @@ import { ProductService } from './services/product.service';
     AdminAuthGuardService,
     CategoriesService,
     ProductService,
+    ProductTableService,
   ],
   bootstrap: [AppComponent],
 })

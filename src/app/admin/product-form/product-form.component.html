@@ -103,8 +103,14 @@
       <img
         [src]="product.imageUrl"
         class="card-img-top"
-        *ngIf="product.imageUrl"
+        *ngIf="product.imageUrl; else defaultImage"
       />
+      <ng-template #defaultImage>
+        <img
+          class="card-img-top"
+          src="https://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder.png"
+        />
+      </ng-template>
       <div class="card-body">
         <h5 class="card-title">{{ product.title }}</h5>
         <p class="card-text">{{ product.price | currency: "USD":"symbol" }}</p>

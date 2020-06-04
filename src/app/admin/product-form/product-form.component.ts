@@ -85,6 +85,7 @@ export class ProductFormComponent implements OnInit {
         .catch(() => {
           this.toast.error('An Error Occurred, product has not been deleted.');
         });
+
       /* upon saving, the user will NOT wait for the promise to resolve. 
         The user will be redirected to AdminProducts and will receive a toast notification */
       this.router.navigate(['/admin/products']);
