@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 import { Product } from '../models/product';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ProductTableService } from './product-table.service';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class ProductService {
 
   getAll(): Observable<Product[]> {
     /* value changes takes an optional parameter that will return the UID from firestore */
+
     return this.db
       .collection('products')
       .valueChanges({ idField: 'id' }) as Observable<Product[]>;
