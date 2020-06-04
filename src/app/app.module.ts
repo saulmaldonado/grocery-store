@@ -60,7 +60,7 @@ import { ProductTableService } from './services/product-table.service';
     FormsModule,
     CustomFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'login', component: LoginComponent },
       {
