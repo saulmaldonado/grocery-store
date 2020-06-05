@@ -16,8 +16,12 @@ export class ProductCardComponent {
 
   ngOnInit(): void {}
 
-  addToCart(product) {
-    this.shoppingCartService.addToCart(product);
+  addToCart() {
+    this.shoppingCartService.addToCart(this.product);
+  }
+
+  removeFromCart() {
+    this.shoppingCartService.removeFromCart(this.product);
   }
 
   getQuantity() {
