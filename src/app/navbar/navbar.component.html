@@ -18,7 +18,15 @@
         <a class="nav-link" routerLink="/products">Products</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/shoppingcart">My Shopping Cart</a>
+        <a class="nav-link" routerLink="/shoppingcart"
+          >My Shopping Cart
+          <span
+            class="badge badge-warning badge-pill"
+            *ngIf="cart$ | async as cart"
+          >
+            {{ cart.totalItemsCount }}</span
+          >
+        </a>
       </li>
 
       <ng-template #notLoggedIn>

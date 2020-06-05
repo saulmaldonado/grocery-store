@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from './models/product';
-import { first, mergeMap, map } from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
+import { first, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { ShoppingCart } from './models/ShoppingCart';
+import { ShoppingCartItem } from './models/ShoppingCartItem';
 
 @Injectable({
   providedIn: 'root',
@@ -22,20 +24,34 @@ export class ShoppingCartService {
    piping the results and mapping them to the desired format fixed the issue. This will make it
    easier to find a specific quantity of a product by searching by id instead of searching the
    original array or querying the store multiple times. */
-  async getCart() {
+  async getCart(): Promise<Observable<ShoppingCart>> {
     let cartId = await this.getOrCreateCartId();
     return this.db
       .collection('shopping-carts/' + cartId + '/items')
       .valueChanges()
       .pipe(
         map((item) => {
-          let obj = {};
+          let cart: { items: ShoppingCartItem[]; dateCreated: number } = {
+            items: {} as ShoppingCartItem[],
+            dateCreated: null,
+          };
+          this.db
+            .collection('shopping-carts')
+            .doc<{ dateCreated: number }>(cartId)
+            .valueChanges()
+            .pipe(first())
+            .subscribe((d) => {
+              cart.dateCreated = d.dateCreated;
+            });
           item.forEach((i: { product: Product; quantity: number }) => {
-            return Object.assign(obj, {
+            return Object.assign(cart.items, {
               [i.product.id]: { product: i.product, quantity: i.quantity },
             });
           });
-          return obj;
+          return new ShoppingCart(
+            cart.items as ShoppingCartItem[],
+            cart.dateCreated
+          );
         })
       );
   }
