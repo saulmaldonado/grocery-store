@@ -6,7 +6,6 @@ import { OrderService } from '../order.service';
 import { AuthService } from '../services/auth.service';
 import { Order } from '../models/order';
 import { Router } from '@angular/router';
-import { DocumentReference } from '@angular/fire/firestore/interfaces';
 
 @Component({
   selector: 'app-checkout',
