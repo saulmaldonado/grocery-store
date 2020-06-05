@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCart } from '../models/ShoppingCart';
 
 @Component({
   selector: 'app-products',
