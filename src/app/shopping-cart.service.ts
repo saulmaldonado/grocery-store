@@ -12,13 +12,6 @@ import { ShoppingCartItem } from './models/ShoppingCartItem';
 export class ShoppingCartService {
   constructor(private db: AngularFirestore) {}
 
-  // Creates a new cart in the database with a timestamp
-  private create() {
-    return this.db.collection('/shopping-carts').add({
-      dateCreated: new Date().getTime(),
-    });
-  }
-
   /* For accessing the users cart from firestore. with the current angular/fire, you
    you cannot read subcollections, with id to document pairing (ex. {documentId: document}) 
    piping the results and mapping them to the desired format fixed the issue. This will make it
@@ -53,6 +46,53 @@ export class ShoppingCartService {
       );
   }
 
+  /* After getting a cartId, an item document will be searched for in firestore path
+  /shopping-carts/{cartId}/items/{itemid}. If doc does not exist, a new doc will be made
+  containing the product object and initial quantity of 1. If the doc does exist the only 
+  change made will be to increment or decrement the quantity by one. */
+  async addToCart(product: Product) {
+    this.updateItemQuantity(product, 1);
+  }
+
+  async removeFromCart(product: Product) {
+    this.updateItemQuantity(product, -1);
+  }
+
+  // Creates a new cart in the database with a timestamp
+  private create() {
+    return this.db.collection('/shopping-carts').add({
+      dateCreated: new Date().getTime(),
+    });
+  }
+
+  /* firestore does not have a method for deleting entire collections.
+    as a work around. An Observable of an array of documentId in the 
+    collection is generated. Once subscribed all of the Id are are passed through 
+    to doc(id).delete() */
+  async clearCart() {
+    let cartId = await this.getOrCreateCartId();
+
+    this.db
+      .collection('shopping-carts/' + cartId + '/items')
+      .valueChanges()
+      .pipe(
+        first(),
+        map((p) => {
+          return p.map((p: any) => {
+            return p.product.id;
+          });
+        })
+      )
+      .subscribe((productIdArray) => {
+        productIdArray.forEach((productId: any) => {
+          this.db
+            .collection('shopping-carts/' + cartId + '/items')
+            .doc(productId)
+            .delete();
+        });
+      });
+  }
+
   /* method will check for a card ID in localStorage (for not not signed in users) 
       if no cardId is found a new cart will be added in firestore */
   private async getOrCreateCartId(): Promise<string> {
@@ -73,18 +113,6 @@ export class ShoppingCartService {
       .doc(cartId)
       .collection('items')
       .doc(productId);
-  }
-
-  /* After getting a cartId, an item document will be searched for in firestore path
-  /shopping-carts/{cartId}/items/{itemid}. If doc does not exist, a new doc will be made
-  containing the product object and initial quantity of 1. If the doc does exist the only 
-  change made will be to increment or decrement the quantity by one. */
-  async addToCart(product: Product) {
-    this.updateItemQuantity(product, 1);
-  }
-
-  async removeFromCart(product: Product) {
-    this.updateItemQuantity(product, -1);
   }
 
   private async updateItemQuantity(product: Product, change: number) {
