@@ -81,7 +81,7 @@ import { OrderService } from './order.service';
         component: ShoppingcartComponent,
       },
       {
-        path: 'order-success',
+        path: 'order-success/:id',
         component: OrderSuccessComponent,
         canActivate: [AuthguardService],
       },

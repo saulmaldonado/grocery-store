@@ -4,6 +4,9 @@ import { ShoppingCart } from '../models/ShoppingCart';
 import { Subscription } from 'rxjs';
 import { OrderService } from '../order.service';
 import { AuthService } from '../services/auth.service';
+import { Order } from '../models/order';
+import { Router } from '@angular/router';
+import { DocumentReference } from '@angular/fire/firestore/interfaces';
 
 @Component({
   selector: 'app-checkout',
@@ -18,6 +21,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   userSub: Subscription;
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private shoppingCartService: ShoppingCartService,
     private orderService: OrderService
@@ -26,9 +30,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     let cart$ = await this.shoppingCartService.getCart();
 
-    let carSub = cart$.subscribe((cart) => (this.cart = cart));
+    this.cartSub = cart$.subscribe((cart) => (this.cart = cart));
 
-    let userSub = this.authService.user$.subscribe(
+    this.userSub = this.authService.user$.subscribe(
       (user) => (this.userId = user.uid)
     );
   }
@@ -38,23 +42,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.userSub.unsubscribe();
   }
 
-  placeOrder() {
-    let order = {
-      userId: this.userId,
-      datePlaced: new Date().getTime(),
-      shipping: this.shipping,
-      items: this.cart.items.map((i) => {
-        return {
-          product: {
-            title: i.product.title,
-            imageUrl: i.product.imageUrl,
-            price: i.product.price,
-          },
-          quantity: i.quantity,
-          totalPrice: i.totalPrice,
-        };
-      }),
-    };
-    this.orderService.storeOrder(order);
+  async placeOrder() {
+    let order = new Order(this.userId, this.shipping, this.cart);
+    let result = await this.orderService.placeOrder({ ...order });
+    this.router.navigate(['order-success', result.id]);
   }
 }

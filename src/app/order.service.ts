@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(private db: AngularFirestore) {}
+  constructor(
+    private db: AngularFirestore,
+    private shoppingCartService: ShoppingCartService
+  ) {}
 
-  storeOrder(order) {
-    this.db.collection('orders').add(order);
+  async placeOrder(order): Promise<DocumentReference> {
+    let result = await this.db.collection('orders').add(order);
+    this.shoppingCartService.clearCart();
+
+    return result;
   }
 }
