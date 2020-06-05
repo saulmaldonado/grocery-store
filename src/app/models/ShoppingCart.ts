@@ -4,7 +4,7 @@ import { Product } from './product';
 export class ShoppingCart {
   items: ShoppingCartItem[] = [];
   constructor(
-    public itemsMap: { [productId: string]: ShoppingCartItem },
+    private itemsMap: { [productId: string]: ShoppingCartItem },
     public dateCreated: number
   ) {
     /* Will create an an iterable for all of the products in the cart for the template */

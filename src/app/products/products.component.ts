@@ -12,13 +12,13 @@ import { ShoppingCart } from '../models/ShoppingCart';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit {
   products$: Observable<Product[]>;
   products: Product[];
   currentCategory: string;
   filteredProducts: Product[];
   cart: any;
-  cart$: Subscription;
+  cart$: Observable<ShoppingCart>;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,10 +27,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    this.cart$ = (await this.shoppingCart.getCart()).subscribe((cart) => {
-      this.cart = cart;
-    });
+    this.cart$ = await this.shoppingCart.getCart();
+    this.populateProducts();
+  }
 
+  private populateProducts() {
     this.productService
       .getAll()
       .pipe(
@@ -41,16 +42,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
       )
       .subscribe((p) => {
         this.currentCategory = p.get('category');
-
-        this.filteredProducts = this.currentCategory
-          ? this.products.filter((p) => {
-              return p.category === this.currentCategory;
-            })
-          : this.products;
+        this.applyFilter();
       });
   }
 
-  ngOnDestroy() {
-    this.cart$.unsubscribe();
+  private applyFilter() {
+    this.filteredProducts = this.currentCategory
+      ? this.products.filter((p) => {
+          return p.category === this.currentCategory;
+        })
+      : this.products;
   }
 }
