@@ -123,10 +123,16 @@ export class ShoppingCartService {
       .valueChanges()
       .pipe(first())
       .subscribe((item: any) => {
-        item$.set({
-          product: product,
-          quantity: (item?.quantity || 0) + change,
-        });
+        let quantity = (item?.quantity || 0) + change;
+
+        if (quantity === 0) {
+          item$.delete();
+        } else {
+          item$.set({
+            product: product,
+            quantity: quantity,
+          });
+        }
       });
   }
 }
