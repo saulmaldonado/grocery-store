@@ -35,27 +35,27 @@ export class ShoppingCartService {
     }
   }
 
-  /* After getting a cartId, an item document will be searched for in firestore path
-  /shopping-carts/{cartId}/items/{itemid}. If doc does not exist, a new doc will be made
-  containing the product object and initial quantity of 1. If the doc does exist the quantity
-  be incremented */
-  async addToCart(product: Product) {
-    let cartId = await this.getOrCreateCartId(product);
-    let item$ = this.db
+  private getItem(cartId: string, productId: string) {
+    return this.db
       .collection('shopping-carts')
       .doc(cartId)
       .collection('items')
-      .doc(product.id);
+      .doc(productId);
+  }
+
+  /* After getting a cartId, an item document will be searched for in firestore path
+  /shopping-carts/{cartId}/items/{itemid}. If doc does not exist, a new doc will be made
+  containing the product object and initial quantity of 1. If the doc does exist the only 
+  change made will be an incremented quantity */
+  async addToCart(product: Product) {
+    let cartId = await this.getOrCreateCartId(product);
+    let item$ = this.getItem(cartId, product.id);
 
     item$
       .valueChanges()
       .pipe(first())
       .subscribe((item: any) => {
-        if (item) {
-          item$.set({ quantity: item.quantity + 1 }, { merge: true });
-        } else {
-          item$.set({ product: product, quantity: 1 });
-        }
+        item$.set({ product: product, quantity: (item?.quantity || 0) + 1 });
       });
   }
 }
