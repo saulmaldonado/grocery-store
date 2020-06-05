@@ -31,8 +31,8 @@ export class ShoppingCartService {
       .valueChanges()
       .pipe(
         map((item) => {
-          let cart: { items: ShoppingCartItem[]; dateCreated: number } = {
-            items: {} as ShoppingCartItem[],
+          let cart: { items: any; dateCreated: number } = {
+            items: {},
             dateCreated: null,
           };
           this.db
@@ -48,10 +48,7 @@ export class ShoppingCartService {
               [i.product.id]: { product: i.product, quantity: i.quantity },
             });
           });
-          return new ShoppingCart(
-            cart.items as ShoppingCartItem[],
-            cart.dateCreated
-          );
+          return new ShoppingCart(cart.items, cart.dateCreated);
         })
       );
   }
