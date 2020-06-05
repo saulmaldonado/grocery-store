@@ -35,6 +35,7 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
 import { ProductCardComponent } from './product/product-card/product-card.component';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { OrderService } from './order.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,6 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
       {
         path: 'shoppingcart',
         component: ShoppingcartComponent,
-        canActivate: [AuthguardService],
       },
       {
         path: 'order-success',
@@ -127,6 +127,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     ProductService,
     ProductTableService,
     ShoppingCartService,
+    OrderService,
   ],
   bootstrap: [AppComponent],
 })

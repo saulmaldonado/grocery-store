@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth, User, UserInfo } from 'firebase';
-import { Observable, from, empty } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { map, take, first, switchMap } from 'rxjs/operators';
+import { auth, User } from 'firebase';
+import { Observable, from, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map, first, switchMap } from 'rxjs/operators';
 import { UserService } from '../user.service';
 import { AppUser } from '../models/app-user';
 
@@ -52,7 +52,7 @@ export class AuthService {
         if (user) {
           return this.userService.getUser(user.uid);
         } else {
-          return empty();
+          return of(null);
         }
       })
     );
