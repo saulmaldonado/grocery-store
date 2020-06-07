@@ -38,6 +38,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
 import { OrderService } from './order.service';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
     ProductQuantityComponent,
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +82,12 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
         component: MyordersComponent,
         canActivate: [AuthguardService],
       },
+      {
+        path: 'orders/:id',
+        component: OrderComponent,
+        canActivate: [AuthguardService],
+      },
+
       {
         path: 'shoppingcart',
         component: ShoppingcartComponent,
