@@ -35,7 +35,7 @@ export class OrderAuthguardService implements CanActivate {
   async canActivate(route: ActivatedRouteSnapshot) {
     let orderId = await this.orderService.getOrderUserId(route);
 
-    if (orderId === this.userId) {
+    if (orderId === this.userId || this.isAdmin) {
       return true;
     } else {
       this.router.navigate(['/']);
