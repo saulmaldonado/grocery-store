@@ -21,7 +21,9 @@ export class MyordersComponent implements OnInit {
   ngOnInit(): void {
     this.orders$ = this.authService.user$.pipe(
       switchMap((u) => {
-        return this.orderService.getOrdersByUser(u.uid).valueChanges();
+        return this.orderService
+          .getOrdersByUser(u.uid)
+          .valueChanges({ idField: 'id' });
       })
     );
   }

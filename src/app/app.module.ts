@@ -40,6 +40,7 @@ import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-c
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { OrderComponent } from './order/order.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { OrderAuthguardService } from './order-authguard.service';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
       {
         path: 'orders/:id',
         component: OrderComponent,
-        canActivate: [AuthguardService],
+        canActivate: [AuthguardService, OrderAuthguardService],
       },
 
       {
@@ -135,6 +136,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
   providers: [
     AuthService,
     AuthguardService,
+    OrderAuthguardService,
     UserService,
     AdminAuthGuardService,
     CategoriesService,

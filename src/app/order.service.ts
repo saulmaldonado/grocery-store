@@ -7,14 +7,8 @@ import {
 import { ShoppingCartService } from './shopping-cart.service';
 import * as firebase from 'firebase';
 import { Order } from './models/order';
-import {
-  ActivatedRoute,
-  ParamMap,
-  Params,
-  ActivatedRouteSnapshot,
-} from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { map, switchMap, first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -55,6 +49,20 @@ export class OrderService {
         return o[0];
       })
     );
+  }
+
+  async getOrderUserId(route: ActivatedRouteSnapshot) {
+    let id = route.paramMap.get('id');
+
+    let userId = (
+      await this.db
+        .collection<Order>('orders', (ref) => this.queryOrderById(id, ref))
+        .valueChanges()
+        .pipe(first())
+        .toPromise()
+    )[0].userId;
+
+    return userId;
   }
 
   private getOrderId(route: ActivatedRoute) {
