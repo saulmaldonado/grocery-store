@@ -1,1 +1,3 @@
-<p>Displaying Order {{ order.id }}</p>
+<div *ngIf="order$ | async as order">
+  <app-order-summary [order]="order"></app-order-summary>
+</div>

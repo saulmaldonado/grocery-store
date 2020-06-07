@@ -1,8 +1,10 @@
 import { ShoppingCart } from './ShoppingCart';
+import { orderItem } from './orderItem';
 
 export class Order {
+  id: string;
   datePlaced: number;
-  items: any[];
+  items: orderItem[];
 
   constructor(
     public userId: string,
