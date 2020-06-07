@@ -17,4 +17,14 @@ export class OrderService {
 
     return result;
   }
+
+  getOrders() {
+    return this.db.collection('orders');
+  }
+
+  getOrdersByUser(userId: string) {
+    return this.db.collection('orders', (ref) =>
+      ref.where('userId', '==', userId)
+    );
+  }
 }
