@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@fortawesome/fontawesome-free/css/all.css";
 body {
   margin: 20px;
   margin-top: 80px;
+}
+ {
+  margin-right: 5px;
 }

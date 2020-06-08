@@ -1,19 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyordersComponent } from './components/myorders/myorders.component';
-import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
-import { ProductsComponent } from './components/products/products.component';
-import { OrderSuccessComponent } from './components/order-success/order-success.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary/shopping-cart-summary.component';
-import { OrderComponent } from './components/order/order.component';
-import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
-import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from 'shared/shared.module';
-import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthguardService } from 'shared/services/authguard.service';
+import { SharedModule } from 'shared/shared.module';
+
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { MyordersComponent } from './components/myorders/myorders.component';
+import { OrderSuccessComponent } from './components/order-success/order-success.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
+import { OrderComponent } from './components/order/order.component';
+import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
+import { ProductsComponent } from './components/products/products.component';
+import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
+import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary/shopping-cart-summary.component';
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { OrderAuthguardService } from './services/order-authguard.service';
 
 @NgModule({
