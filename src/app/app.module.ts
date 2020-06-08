@@ -35,6 +35,7 @@ import { ShoppingCartSummaryComponent } from './shopping/components/shopping-car
 import { ShoppingcartComponent } from './shopping/components/shoppingcart/shoppingcart.component';
 import { OrderAuthguardService } from './shopping/services/order-authguard.service';
 import { SharedModule } from 'shared/shared.module';
+import { AdminModule } from 'admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -44,13 +45,11 @@ import { SharedModule } from 'shared/shared.module';
     ShoppingcartComponent,
     MyordersComponent,
     LoginComponent,
-    AdminOrdersComponent,
-    AdminProductsComponent,
+
     ProductsComponent,
     NotFoundComponent,
     OrderSuccessComponent,
     CheckoutComponent,
-    ProductFormComponent,
     SortableTableDirective,
     ProductFilterComponent,
     ShoppingCartSummaryComponent,
@@ -61,12 +60,12 @@ import { SharedModule } from 'shared/shared.module';
   imports: [
     BrowserModule,
     SharedModule,
+    AdminModule,
     ToastrModule.forRoot(),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule,
-    NgbModule,
     FormsModule,
     CustomFormsModule,
     RouterModule.forRoot([
@@ -98,39 +97,11 @@ import { SharedModule } from 'shared/shared.module';
         component: CheckoutComponent,
         canActivate: [AuthguardService],
       },
-      {
-        path: 'admin',
-        children: [
-          {
-            path: 'orders',
-            component: AdminOrdersComponent,
-            canActivate: [AuthguardService, AdminAuthGuardService],
-          },
-          {
-            path: 'products/new',
-            component: ProductFormComponent,
-            canActivate: [AuthguardService, AdminAuthGuardService],
-          },
-          {
-            path: 'products/:id',
-            component: ProductFormComponent,
-            canActivate: [AuthguardService, AdminAuthGuardService],
-          },
-          {
-            path: 'products',
-            component: AdminProductsComponent,
-            canActivate: [AuthguardService, AdminAuthGuardService],
-          },
-        ],
-      },
+
       { path: '**', component: NotFoundComponent },
     ]),
   ],
-  providers: [
-    OrderAuthguardService,
-    AdminAuthGuardService,
-    ProductTableService,
-  ],
+  providers: [OrderAuthguardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
