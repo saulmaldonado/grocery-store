@@ -1,46 +1,40 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from '../environments/environment';
-import { AppComponent } from './app.component';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from './core/components/navbar/navbar.component';
-import { RouterModule } from '@angular/router';
-import { HomeComponent } from './core/components/home/home.component';
-import { ShoppingcartComponent } from './shopping/components/shoppingcart/shoppingcart.component';
-import { MyordersComponent } from './shopping/components/myorders/myorders.component';
-import { LoginComponent } from './core/components/login/login.component';
-import { AdminOrdersComponent } from './admin/components/admin-orders/admin-orders.component';
-import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
-import { ProductsComponent } from './shopping/components/products/products.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { AuthService } from 'shared/services/auth.service';
-import { AuthguardService } from 'shared/services/authguard.service';
-import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
-import { CheckoutComponent } from './shopping/components/checkout/checkout.component';
-import { UserService } from 'shared/services/user.service';
-import { AdminAuthGuardService } from './admin/services/admin-auth-guard.service';
-import { ProductFormComponent } from './admin/components/product-form/product-form.component';
-import { CategoriesService } from 'shared/services/categories.service';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
-import { CustomFormsModule } from 'ngx-custom-validators';
-import { ProductService } from 'shared/services/product.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortableTableDirective } from 'admin/directives/sortable-table.directive';
 import { ProductTableService } from 'admin/services/product-table.service';
-import { ProductFilterComponent } from './shopping/components/products/product-filter/product-filter.component';
-import { ProductCardComponent } from 'shared/components/product-card/product-card.component';
-import { ShoppingCartService } from 'shared/services/shopping-cart.service';
-import { ProductQuantityComponent } from 'shared/components/product-quantity/product-quantity.component';
-import { OrderService } from 'shared/services/order.service';
-import { ShoppingCartSummaryComponent } from './shopping/components/shopping-cart-summary/shopping-cart-summary.component';
-import { ShippingFormComponent } from './shopping/components/shipping-form/shipping-form.component';
-import { OrderComponent } from './shopping/components/order/order.component';
+import { CustomFormsModule } from 'ngx-custom-validators';
+import { ToastrModule } from 'ngx-toastr';
+import { AuthguardService } from 'shared/services/authguard.service';
+
+import { environment } from '../environments/environment';
+import { AdminOrdersComponent } from './admin/components/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
+import { ProductFormComponent } from './admin/components/product-form/product-form.component';
+import { AdminAuthGuardService } from './admin/services/admin-auth-guard.service';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './core/components/home/home.component';
+import { LoginComponent } from './core/components/login/login.component';
+import { NavbarComponent } from './core/components/navbar/navbar.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CheckoutComponent } from './shopping/components/checkout/checkout.component';
+import { MyordersComponent } from './shopping/components/myorders/myorders.component';
+import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
 import { OrderSummaryComponent } from './shopping/components/order-summary/order-summary.component';
+import { OrderComponent } from './shopping/components/order/order.component';
+import { ProductFilterComponent } from './shopping/components/products/product-filter/product-filter.component';
+import { ProductsComponent } from './shopping/components/products/products.component';
+import { ShippingFormComponent } from './shopping/components/shipping-form/shipping-form.component';
+import { ShoppingCartSummaryComponent } from './shopping/components/shopping-cart-summary/shopping-cart-summary.component';
+import { ShoppingcartComponent } from './shopping/components/shoppingcart/shoppingcart.component';
 import { OrderAuthguardService } from './shopping/services/order-authguard.service';
+import { SharedModule } from 'shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -59,8 +53,6 @@ import { OrderAuthguardService } from './shopping/services/order-authguard.servi
     ProductFormComponent,
     SortableTableDirective,
     ProductFilterComponent,
-    ProductCardComponent,
-    ProductQuantityComponent,
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
     OrderComponent,
@@ -68,6 +60,7 @@ import { OrderAuthguardService } from './shopping/services/order-authguard.servi
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     ToastrModule.forRoot(),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -134,16 +127,9 @@ import { OrderAuthguardService } from './shopping/services/order-authguard.servi
     ]),
   ],
   providers: [
-    AuthService,
-    AuthguardService,
     OrderAuthguardService,
-    UserService,
     AdminAuthGuardService,
-    CategoriesService,
-    ProductService,
     ProductTableService,
-    ShoppingCartService,
-    OrderService,
   ],
   bootstrap: [AppComponent],
 })
