@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserService } from './user.service';
+import { UserService } from 'shared/services/user.service';
 
 describe('UserService', () => {
   let service: UserService;
