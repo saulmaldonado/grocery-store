@@ -36,31 +36,23 @@ import { ShoppingcartComponent } from './shopping/components/shoppingcart/shoppi
 import { OrderAuthguardService } from './shopping/services/order-authguard.service';
 import { SharedModule } from 'shared/shared.module';
 import { AdminModule } from 'admin/admin.module';
+import { ShoppingModule } from './shopping/shopping.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    ShoppingcartComponent,
-    MyordersComponent,
     LoginComponent,
-
-    ProductsComponent,
     NotFoundComponent,
-    OrderSuccessComponent,
-    CheckoutComponent,
     SortableTableDirective,
-    ProductFilterComponent,
-    ShoppingCartSummaryComponent,
-    ShippingFormComponent,
-    OrderComponent,
-    OrderSummaryComponent,
   ],
   imports: [
     BrowserModule,
     SharedModule,
+    NgbModule,
     AdminModule,
+    ShoppingModule,
     ToastrModule.forRoot(),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -70,34 +62,7 @@ import { AdminModule } from 'admin/admin.module';
     CustomFormsModule,
     RouterModule.forRoot([
       { path: '', component: ProductsComponent },
-      { path: 'products', component: ProductsComponent },
       { path: 'login', component: LoginComponent },
-      {
-        path: 'orders',
-        component: MyordersComponent,
-        canActivate: [AuthguardService],
-      },
-      {
-        path: 'orders/:id',
-        component: OrderComponent,
-        canActivate: [AuthguardService, OrderAuthguardService],
-      },
-
-      {
-        path: 'shoppingcart',
-        component: ShoppingcartComponent,
-      },
-      {
-        path: 'order-success/:id',
-        component: OrderSuccessComponent,
-        canActivate: [AuthguardService],
-      },
-      {
-        path: 'checkout',
-        component: CheckoutComponent,
-        canActivate: [AuthguardService],
-      },
-
       { path: '**', component: NotFoundComponent },
     ]),
   ],
