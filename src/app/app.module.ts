@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortableTableDirective } from 'admin/directives/sortable-table.directive';
 import { ProductTableService } from 'admin/services/product-table.service';
 import { CustomFormsModule } from 'ngx-custom-validators';
@@ -37,21 +36,16 @@ import { OrderAuthguardService } from './shopping/services/order-authguard.servi
 import { SharedModule } from 'shared/shared.module';
 import { AdminModule } from 'admin/admin.module';
 import { ShoppingModule } from './shopping/shopping.module';
+import { COREModule } from 'core/core.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    LoginComponent,
-    NotFoundComponent,
-    SortableTableDirective,
-  ],
+  declarations: [AppComponent, NotFoundComponent, SortableTableDirective],
   imports: [
     BrowserModule,
     SharedModule,
-    NgbModule,
     AdminModule,
+    COREModule,
     ShoppingModule,
     ToastrModule.forRoot(),
     AngularFirestoreModule,
