@@ -22,7 +22,7 @@ import { OrderAuthguardService } from './shopping/services/order-authguard.servi
 import { ShoppingModule } from './shopping/shopping.module';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, SortableTableDirective],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     SharedModule,

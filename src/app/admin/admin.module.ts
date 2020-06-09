@@ -10,12 +10,14 @@ import { SharedModule } from 'shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AuthguardService } from 'shared/services/authguard.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SortableTableDirective } from './directives/sortable-table.directive';
 
 @NgModule({
   declarations: [
     AdminOrdersComponent,
     AdminProductsComponent,
     ProductFormComponent,
+    SortableTableDirective,
   ],
   imports: [
     CommonModule,

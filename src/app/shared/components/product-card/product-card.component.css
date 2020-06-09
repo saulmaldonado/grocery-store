@@ -4,3 +4,8 @@
 .card-footer {
   padding: 0px;
 }
+
+.card {
+  height: 90%;
+  max-width: 300px;
+}

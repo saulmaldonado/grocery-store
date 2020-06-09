@@ -5,11 +5,13 @@
   --secondary-color: orange;
   --text-color: black;
 }
+
 body {
   margin: 20px;
   margin-top: 70px;
 }
 
+/* Navbar */
 .navbar-dark .navbar-brand .fa-carrot {
   color: var(--secondary-color);
 }
@@ -18,25 +20,23 @@ body {
   color: var(--primary-color);
 }
 
+/* Category Sort */
+
 .list-group-item.active {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
   color: var(--text-color);
 }
 
-.card {
-  height: 90%;
-  max-width: 300px;
-}
-
-.fas.fa-minus {
-  font-size: 100%;
-}
-
-.fas.fa-plus {
-  font-size: 100%;
-}
+/* Product Card */
 
 .card-img-top {
   height: 50%;
+}
+
+@media (max-width: 400px) {
+  body {
+    margin: 5px;
+    margin-top: 70px;
+  }
 }

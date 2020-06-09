@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ProductService } from 'shared/services/product.service';
 import { Product } from 'shared/models/product';
 import { Observable, Subscription } from 'rxjs';
@@ -20,6 +20,8 @@ export class ProductsComponent implements OnInit {
   cart: any;
   cart$: Observable<ShoppingCart>;
 
+  cardsPerRow: number;
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -29,6 +31,7 @@ export class ProductsComponent implements OnInit {
   async ngOnInit() {
     this.cart$ = await this.shoppingCart.getCart();
     this.populateProducts();
+    this.calculateRows(window.innerWidth);
   }
 
   private populateProducts() {
@@ -52,5 +55,20 @@ export class ProductsComponent implements OnInit {
           return p.category === this.currentCategory;
         })
       : this.products;
+  }
+
+  @HostListener('window:resize', ['$event.target.innerWidth'])
+  private CardsPerRow(width) {
+    this.calculateRows(width);
+  }
+
+  private calculateRows(width) {
+    if (width >= 770) {
+      this.cardsPerRow = 3;
+    } else if (width < 770 && width >= 520) {
+      this.cardsPerRow = 2;
+    } else {
+      this.cardsPerRow = 1;
+    }
   }
 }
