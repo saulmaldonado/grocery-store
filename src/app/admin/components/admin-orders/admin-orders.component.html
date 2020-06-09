@@ -11,7 +11,7 @@
   <tbody>
     <tr *ngFor="let order of orders$ | async">
       <td>{{ order.shipping.name }}</td>
-      <td>{{ order.datePlaced | date }}</td>
+      <td>{{ order.datePlaced | date: "short" }}</td>
       <td>
         {{ order.id }}
       </td>
