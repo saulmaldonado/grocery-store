@@ -13,6 +13,7 @@ import { ShoppingCart } from 'app/shared/models/ShoppingCart';
 export class NavbarComponent implements OnInit {
   appUser: AppUser;
   cart$: Observable<ShoppingCart>;
+  collapsed: boolean = false;
 
   constructor(
     private auth: AuthService,

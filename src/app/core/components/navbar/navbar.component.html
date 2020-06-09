@@ -6,24 +6,27 @@
     <button
       class="navbar-toggler"
       type="button"
-      data-toggle="collapse"
-      data-target="#navbarsExampleDefault"
       aria-controls="navbarsExampleDefault"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      (click)="collapsed = !collapsed"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
+    <div
+      class="collapse navbar-collapse"
+      [class.collapse]="!collapsed"
+      id="navbarsExampleDefault"
+    >
+      <ul class="navbar-nav mr-auto float-left">
         <li class="nav-item active">
           <a class="nav-link" routerLink="/products">Products</a>
         </li>
       </ul>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav float-right">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/shoppingcart">
+          <a class="nav-link float-right" routerLink="/shoppingcart">
             <i class="fas fa-shopping-cart mr-1"></i>
             <span
               class="badge badge-warning badge-pill"
@@ -78,3 +81,62 @@
     </div>
   </div>
 </nav>
+
+<!-- <nav class="navbar navbar-expand-md navbar-light bg-light">
+  <span class="navbar-brand">Dropdowns in navbar</span>
+  <button
+    class="navbar-toggler"
+    type="button"
+    aria-controls="navbarContent"
+    [attr.aria-expanded]="!collapsed"
+    aria-label="Toggle navigation"
+    (click)="collapsed = !collapsed"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse" [class.collapse]="!collapsed" id="navbarContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" ngbDropdown>
+        <a
+          class="nav-link"
+          style="cursor: pointer;"
+          ngbDropdownToggle
+          id="navbarDropdown1"
+          role="button"
+        >
+          Static
+        </a>
+      </li>
+
+      <li class="nav-item" ngbDropdown>
+        <a
+          class="nav-link"
+          style="cursor: pointer;"
+          ngbDropdownToggle
+          id="navbarDropdown2"
+          role="button"
+        >
+          Static right
+        </a>
+      </li>
+
+      <li
+        class="nav-item"
+        ngbDropdown
+        display="dynamic"
+        placement="bottom-right"
+      >
+        <a
+          class="nav-link"
+          style="cursor: pointer;"
+          ngbDropdownToggle
+          id="navbarDropdown3"
+          role="button"
+        >
+          Dynamic
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav> -->

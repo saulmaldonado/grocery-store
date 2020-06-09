@@ -1,3 +1,15 @@
 #dropdown {
   cursor: pointer;
 }
+
+.navbar-collapse {
+  margin-right: 30px;
+}
+
+.dropdown-menu {
+  position: absolute;
+}
+
+.navbar-toggler {
+  margin-right: 5px;
+}
