@@ -26,8 +26,8 @@ export class OrderService {
     return result;
   }
 
-  getOrders() {
-    return this.db.collection('orders');
+  getAllOrders() {
+    return this.db.collection<Order>('orders').valueChanges({ idField: 'id' });
   }
 
   getOrdersByUser(userId: string) {

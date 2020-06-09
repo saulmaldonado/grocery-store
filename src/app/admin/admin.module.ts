@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { AuthguardService } from 'shared/services/authguard.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortableTableDirective } from './directives/sortable-table.directive';
+import { OrderService } from 'shared/services/order.service';
 
 @NgModule({
   declarations: [
