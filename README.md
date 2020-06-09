@@ -1,7 +1,10 @@
 # GroceryShop
 ✅ MVP
+
 [WIP, still making occasional commits]
+
 [Live Project](https://grocery-shop-cd470.web.app/)
+
 Grocery e-commerce store made with Angular 9 and Firebase.
 
 
