@@ -4,3 +4,39 @@
   border-radius: 100%;
   background-size: cover;
 }
+
+@media (max-width: 600px) {
+  .thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-size: cover;
+  }
+  table {
+    font-size: 0.75rem;
+  }
+  .row {
+    padding: 0;
+  }
+
+  ::ng-deep .btn.btn-secondary.btn-block {
+    border: none;
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ::ng-deep .fas.fa-minus {
+    font-size: 0.75rem;
+  }
+
+  ::ng-deep .fas.fa-plus {
+    font-size: 0.75rem;
+  }
+
+  ::ng-deep .col {
+    font-size: 0.6rem;
+  }
+}

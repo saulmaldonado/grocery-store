@@ -1,6 +1,6 @@
 <h1>Shopping Cart</h1>
 
-<div class="row col-10" *ngIf="cart$ | async as cart">
+<div class="row col-lg-10 col-md mx-auto" *ngIf="cart$ | async as cart">
   <p *ngIf="cart.totalItemsCount">
     You have {{ cart.totalItemsCount }} items in your shopping cart.
     <button (click)="clearCart()" class="btn btn-light btn-sm">
@@ -13,8 +13,8 @@
       <tr>
         <th></th>
         <th>Product</th>
-        <th class="text-center" style="width: 230px;">Quantity</th>
-        <th class="text-right" style="width: 200px;">Price</th>
+        <th class="text-center">Quantity</th>
+        <th class="text-right">Price</th>
       </tr>
     </thead>
     <tbody>
