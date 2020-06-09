@@ -1,0 +1,33 @@
+.search-queries {
+  display: flex;
+}
+
+.search-queries input {
+  max-width: 200px;
+}
+
+.search-queries :nth-child(2) {
+  margin-left: 10px;
+}
+
+@media (max-width: 550px) {
+  * {
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 440px) {
+  * {
+    font-size: 0.75rem;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+  }
+
+  .table-container {
+    overflow-x: scroll;
+  }
+}
