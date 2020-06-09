@@ -1,0 +1,5 @@
+@media (max-width: 350px) {
+  .d-flex.justify-content-between.p-2 select {
+    max-width: 125px;
+  }
+}
