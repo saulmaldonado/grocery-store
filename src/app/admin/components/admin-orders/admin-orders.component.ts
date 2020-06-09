@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { OrderService } from 'shared/services/order.service';
-import { Observable } from 'rxjs';
 import { Order } from 'shared/models/order';
 
 @Component({
@@ -9,10 +8,36 @@ import { Order } from 'shared/models/order';
   styleUrls: ['./admin-orders.component.css'],
 })
 export class AdminOrdersComponent implements OnInit {
-  orders$: Observable<Order[]>;
+  filteredOrders: Order[];
+  orders: Order[];
+
+  @ViewChild('idQuery') idQuery: ElementRef;
+  @ViewChild('customerQuery') customerQuery: ElementRef;
+
   constructor(private ordersService: OrderService) {}
 
   ngOnInit(): void {
-    this.orders$ = this.ordersService.getAllOrders();
+    this.ordersService.getAllOrders().subscribe((orders) => {
+      this.orders = orders;
+      this.filter();
+    });
+  }
+
+  filter() {
+    this.filteredOrders = this.filterByCustomer(this.filterByID(this.orders));
+  }
+
+  private filterByID(orders: Order[]) {
+    if (!this.idQuery) return orders;
+    return orders.filter((orders) => {
+      return orders.id.includes(this.idQuery.nativeElement.value);
+    });
+  }
+
+  private filterByCustomer(orders: Order[]) {
+    if (!this.customerQuery) return orders;
+    return orders.filter((orders) => {
+      return orders.id.includes(this.customerQuery.nativeElement.value);
+    });
   }
 }
