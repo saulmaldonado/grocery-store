@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth, User } from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import { Observable, from, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, first, switchMap } from 'rxjs/operators';
@@ -11,7 +12,7 @@ import { AppUser } from 'shared/models/app-user';
   providedIn: 'root',
 })
 export class AuthService {
-  user$: Observable<User>;
+  user$: Observable<firebase.User>;
 
   constructor(
     private fbAuth: AngularFireAuth,
@@ -36,7 +37,7 @@ export class AuthService {
   }
 
   login() {
-    this.fbAuth.signInWithRedirect(new auth.GoogleAuthProvider());
+    this.fbAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
     const redirectUrl =
       this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', redirectUrl);

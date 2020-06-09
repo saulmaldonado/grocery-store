@@ -5,7 +5,8 @@ import {
   CollectionReference,
 } from '@angular/fire/firestore';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 import { Order } from 'shared/models/order';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { map, switchMap, first } from 'rxjs/operators';
