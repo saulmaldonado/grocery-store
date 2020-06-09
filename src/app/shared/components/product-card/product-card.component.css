@@ -9,3 +9,12 @@
   height: 90%;
   max-width: 300px;
 }
+
+.card-body {
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+}
+
+.card-body::-webkit-scrollbar {
+  display: none;
+}

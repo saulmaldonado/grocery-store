@@ -5,6 +5,10 @@
   background-size: cover;
 }
 
+:host ::ng-deep .btn.btn-secondary.btn-block {
+  max-width: 50px;
+}
+
 @media (max-width: 600px) {
   .thumbnail {
     width: 50px;
@@ -19,24 +23,19 @@
     padding: 0;
   }
 
-  ::ng-deep .btn.btn-secondary.btn-block {
+  :host ::ng-deep .btn.btn-secondary.btn-block {
     border: none;
-    margin: 0;
     padding: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  ::ng-deep .fas.fa-minus {
+  :host ::ng-deep .fas.fa-minus {
     font-size: 0.75rem;
   }
 
-  ::ng-deep .fas.fa-plus {
+  :host ::ng-deep .fas.fa-plus {
     font-size: 0.75rem;
-  }
-
-  ::ng-deep .col {
-    font-size: 0.6rem;
   }
 }
