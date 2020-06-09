@@ -63,7 +63,9 @@ export class ProductsComponent implements OnInit {
   }
 
   private calculateRows(width) {
-    if (width >= 770) {
+    if (width >= 1700) {
+      this.cardsPerRow = 4;
+    } else if (width >= 770 && width < 1700) {
       this.cardsPerRow = 3;
     } else if (width < 770 && width >= 520) {
       this.cardsPerRow = 2;
