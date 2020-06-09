@@ -1,9 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@fortawesome/fontawesome-free/css/all.css";
+:root {
+  --primary-color: rgb(131, 228, 76);
+  --secondary-color: orange;
+  --text-color: black;
+}
 body {
   margin: 20px;
-  margin-top: 80px;
+  margin-top: 70px;
 }
- {
-  margin-right: 5px;
+
+.navbar-dark .navbar-brand .fa-carrot {
+  color: var(--secondary-color);
+}
+
+.navbar-dark .navbar-brand span {
+  color: var(--primary-color);
+}
+
+.list-group-item.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.card {
+  height: 90%;
+  max-width: 300px;
+}
+
+.fas.fa-minus {
+  font-size: 100%;
+}
+
+.fas.fa-plus {
+  font-size: 100%;
+}
+
+.card-img-top {
+  height: 50%;
 }
