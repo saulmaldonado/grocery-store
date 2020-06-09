@@ -1,6 +1,6 @@
 <h1>Orders</h1>
 
-<div>
+<div class="search-queries">
   <input
     #idQuery
     type="text"
@@ -17,29 +17,30 @@
     (keyup)="filter()"
   />
 </div>
-<table class="table" *ngIf="tableService.pageData$">
-  <thead>
-    <tr>
-      <th>Customer</th>
-      <th>Date</th>
-      <th>ID</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let order of tableService.pageData$ | async">
-      <td>{{ order.shipping.name }}</td>
-      <td>{{ order.datePlaced | date: "short" }}</td>
-      <td>
-        {{ order.id }}
-      </td>
-      <td>
-        <a routerLink="/orders/{{ order.id }}">View</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+<div class="table-container">
+  <table class="table" *ngIf="tableService.pageData$">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Date</th>
+        <th>ID</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of tableService.pageData$ | async">
+        <td>{{ order.shipping.name }}</td>
+        <td>{{ order.datePlaced | date: "short" }}</td>
+        <td>
+          {{ order.id }}
+        </td>
+        <td>
+          <a routerLink="/orders/{{ order.id }}">View</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <div class="d-flex justify-content-between p-2">
   <ngb-pagination
     [collectionSize]="tableService.tableSize"
