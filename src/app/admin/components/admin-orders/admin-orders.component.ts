@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { OrderService } from 'shared/services/order.service';
 import { Order } from 'shared/models/order';
+import { AdminOrdersService } from 'admin/services/admin-orders.service';
 
 @Component({
   selector: 'app-admin-orders',
@@ -14,7 +15,10 @@ export class AdminOrdersComponent implements OnInit {
   @ViewChild('idQuery') idQuery: ElementRef;
   @ViewChild('customerQuery') customerQuery: ElementRef;
 
-  constructor(private ordersService: OrderService) {}
+  constructor(
+    private ordersService: OrderService,
+    private adminOrdersService: AdminOrdersService
+  ) {}
 
   ngOnInit(): void {
     this.ordersService.getAllOrders().subscribe((orders) => {
@@ -24,20 +28,12 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   filter() {
-    this.filteredOrders = this.filterByCustomer(this.filterByID(this.orders));
-  }
-
-  private filterByID(orders: Order[]) {
-    if (!this.idQuery) return orders;
-    return orders.filter((orders) => {
-      return orders.id.includes(this.idQuery.nativeElement.value);
-    });
-  }
-
-  private filterByCustomer(orders: Order[]) {
-    if (!this.customerQuery) return orders;
-    return orders.filter((orders) => {
-      return orders.id.includes(this.customerQuery.nativeElement.value);
-    });
+    this.filteredOrders = this.adminOrdersService.filterByCustomer(
+      this.adminOrdersService.filterByID(
+        this.orders,
+        this.idQuery.nativeElement.value
+      ),
+      this.customerQuery.nativeElement.value
+    );
   }
 }
